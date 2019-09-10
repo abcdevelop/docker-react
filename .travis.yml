@@ -4,9 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t abcdevelop/docker-react -f Dockerfifle.dev .
-
-
+  - docker build -t abcdevelop/docker-react -f Dockerfile.dev .
 
 script:
   - docker run -e CI=true abcdevelop/docker-react yarn test
@@ -15,4 +13,3 @@ script:
 
 
 
-  
