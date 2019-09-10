@@ -8,4 +8,5 @@ before_install:
 
 script:
   #- docker run abcdevelop/docker-react yarn test --coverage
-  - docker run -e CI=true abcdevelop/docker-react yarn test
+  #- docker run -e CI=true abcdevelop/docker-react yarn test
+  - docker run -e CI=true abcdevelop/docker-react npm run test
