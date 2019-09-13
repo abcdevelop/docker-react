@@ -3,12 +3,12 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - docker build -t abcdevelop/docker-react -f Dockerfile.dev .
+#before_install:
+#  - docker build -t abcdevelop/docker-react -f Dockerfile.dev .
 
-script:
+#script:
   #- docker run abcdevelop/docker-react yarn test --coverage
-  - docker run -e CI=true abcdevelop/docker-react yarn test
+#  - docker run -e CI=true abcdevelop/docker-react yarn test
   #- docker run -e CI=true abcdevelop/docker-react npm run test
 
 #deploy:
@@ -29,3 +29,17 @@ script:
 #  secure: $AWS_SECRET_KEY
 #access_key_id: 
   #secure: $AWS_ACCESS_KEY
+
+before_install:
+  - docker build -t $DOCKER_ID/docker-react-test -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true $DOCKER_ID/docker-react-test yarn test
+
+after_success:
+  - docker build -t $DOCKER_ID/docker-react .
+  # Log in to the docker CLI
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin
+  # Take those images and push them to docker hub
+  - docker push $DOCKER_ID/docker-react
+  
