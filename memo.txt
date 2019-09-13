@@ -1,0 +1,6 @@
+git config --global user.email "bruno.panaget@yahoo.fr"
+git config --global user.name "abcdevelop"
+git init
+git commit -m "first commit"
+git remote add origin git@github.com:abcdevelop/docker-react.git
+git push -u origin master
